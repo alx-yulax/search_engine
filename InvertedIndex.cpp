@@ -1,9 +1,9 @@
 #include "InvertedIndex.h"
 #include <algorithm>
-#include <iostream>
 
 void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs) {
     docs = input_docs;
+    freq_dictionary.clear();
     for (int doc_id = 0; doc_id < docs.size(); ++doc_id) {
         size_t prev = 0,next;
         std::map<std::string, int> wordsCount;
@@ -12,7 +12,6 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs) {
             std::string word = docs[doc_id].substr(prev, next - prev);
             if (word.length() > 0) {
                 std::transform(word.begin(), word.end(), word.begin(), tolower);
-                std::cout << word<< std::endl;
                 ++wordsCount[word];
             }
             prev = next + 1;
@@ -24,5 +23,11 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs) {
 }
 
 std::vector<Entry> InvertedIndex::GetWordCount(const std::string &word) {
-    return freq_dictionary[word];
+    auto search = freq_dictionary.find(word);
+    if (search != freq_dictionary.end()) {
+        return search->second;
+    } else {
+        std::vector<Entry> empty;
+        return empty;
+    }
 }

@@ -1,4 +1,8 @@
 #include "nlohmann/json.hpp"
+#include <thread>
+#include <mutex>
+#include <fstream>
+#include <sstream>
 
 #ifndef SEARCH_ENGINE_CONVERTERJSON_H
 #define SEARCH_ENGINE_CONVERTERJSON_H
@@ -8,6 +12,7 @@
 */
 class ConverterJSON {
 public:
+    std::mutex input_docs_access;
     ConverterJSON() = default;
 
 /**
@@ -33,8 +38,16 @@ public:
 /**
 * Положить в файл answers.json результаты поисковых запросов
 */
-    void putAnswers(std::vector<std::vector<std::pair<int, float>>>
+    void PutAnswers(std::vector<std::vector<std::pair<int, float>>>
                     answers);
+
+    /**
+    * Проверить файл config.json
+    */
+    bool CheckConfig(std::string currentVersion);
+
+    void GetText(int docid, std::string path, std::map<int,std::string> &input_docs_Sorted);
+
 };
 
 

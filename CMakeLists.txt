@@ -27,12 +27,3 @@ target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
 #target_link_libraries(search_engine PRIVATE gtest_main)
 #include(GoogleTest)
 #gtest_discover_tests(search_engine)
-
-#BOOST
-#set (Boost_USE_STATIC_LIBS OFF)
-#set(Boost_INCLUDE_DIR "F:\\public\\alx\\skilbox_project\\boost_1_71_0")
-#set(Boost_LIBRARY_DIR "F:\\public\\alx\\skilbox_project\\boost_1_71_0\\stage\\lib")
-#find_package(Boost COMPONENTS REQUIRED)
-#include_directories(${Boost_INCLUDE_DIR})
-#link_directories(${Boost_LIBRARY_DIR})
-#target_link_libraries(search_engine ${Boost_LIBRARIES})
